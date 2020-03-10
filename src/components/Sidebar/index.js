@@ -1,14 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-
-function toggleLesson (module, lesson){
-    return {
-        type: 'TOGGLE_LESSON',
-        module,
-        lesson,
-    }
-}
+import * as CourseActions from '../../store/actions/course'
 
 const Sidebar = ({ module, dispatch}) => (
     <aside>
@@ -19,7 +12,7 @@ const Sidebar = ({ module, dispatch}) => (
                     {module.lesson.map(lesson => (
                         <li key={lesson.id}>
                             {lesson.title}
-                            <button onClick={() => dispatch(toggleLesson(module, lesson))}>
+                            <button onClick={() => dispatch(CourseActions.toggleLesson(module, lesson))}>
                                 Selecionar
                             </button>
                         </li>
@@ -31,4 +24,4 @@ const Sidebar = ({ module, dispatch}) => (
 
 )
 
-export default connect(state => ({ module: state.module }))(Sidebar);
+export default connect(state => ({ module: state.course.module }))(Sidebar);
